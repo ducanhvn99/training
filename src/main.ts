@@ -1,5 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import mongoose, { Schema, model, connect } from 'mongoose';
+import { Account, AccountSchema } from './account/schema/account.schema';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -7,31 +9,24 @@ async function bootstrap() {
 }
 bootstrap();
 
-//----------------------------------------------
+// Create a Model.
+const Acc = model<Account>('Account', AccountSchema);
 
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://training_user:NDAvietnam*99@training.9kf6sqw.mongodb.net/?retryWrites=true&w=majority&appName=training";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+run().catch(err => console.log(err));
 
 async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+  // Connect to MongoDB
+  await connect('mongodb+srv://training_user:NDAvietnam*99@training.9kf6sqw.mongodb.net/?retryWrites=true&w=majority&appName=training');
+
+  console.log(mongoose.connection.readyState);
+
+  const acc = new Account();
+    acc.username = 'jdoe12345';
+    acc.name = 'John Doe';
+    acc.password = 'johndoepassword';
+    acc.age = 20;
+    acc.location = 'USA';
+    await Acc.create(acc);
+
+  console.log(acc.name);
 }
-run().catch(console.dir);
