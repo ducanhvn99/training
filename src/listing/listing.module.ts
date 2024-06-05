@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ListingController } from './listing.controller';
-import { ListingService } from './listing.service';
-import { Listing, ListingSchema } from './schema/listing.schema';
+import { Module } from "@nestjs/common";
+import { DatabaseModule } from "src/database/database.module";
+import { ListingController } from "./listing.controller";
+import { ListingService } from "./listing.service";
+import { listingProvider } from "./listing.provider";
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Listing.name, schema: ListingSchema }])],
+  imports: [DatabaseModule],
   controllers: [ListingController],
-  providers: [ListingService],
+  providers: [ListingService, ...listingProvider],
 })
 export class ListingModule {}

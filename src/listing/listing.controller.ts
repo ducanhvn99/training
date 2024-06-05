@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ListingService } from './listing.service';
-import { CreateListingDto } from './dto/create-listing.dto';
-import { Listing } from './schema/listing.schema';
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { ListingService } from "./listing.service";
+import { CreateListingDto } from "./dto/create-listing.dto";
+import { IListing } from "./interface/listing.interface";
 
 @Controller('listing')
 export class ListingController {
@@ -13,12 +13,12 @@ export class ListingController {
   }
 
   @Get()
-  async findAll(): Promise<Listing[]> {
+  async findAll(): Promise<IListing[]> {
     return this.listingService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Listing> {
+  async findOne(@Param('id') id: string): Promise<IListing> {
     return this.listingService.findOne(id);
   }
 

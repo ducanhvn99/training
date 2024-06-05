@@ -1,37 +1,16 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose from "mongoose";
 
-export type ListingDocument = HydratedDocument<Listing>;
-
-@Schema()
-export class Listing {
-    @Prop()
-    username: string;
-
-    @Prop()
-    location: string;
-
-    @Prop()
-    price: number;
-
-    @Prop()
-    VIN: string;
-
-    @Prop()
-    brand: string;
-
-    @Prop()
-    model: string;
-
-    @Prop()
-    title: string;
-
-    @Prop()
-    color: string;
-
-    @Prop()
-    year: number;
-    mileague: number;
-}
-
-export const ListingSchema = SchemaFactory.createForClass(Listing);
+export const listingSchema = new mongoose.Schema({
+    username: { type: String, required: true },
+    location: { type: String, required: true },
+    phone: { type: String, required: true },
+    email: String,
+    price: { type: Number, required: true },
+    VIN: { type: String, required: true },
+    brand: { type: String, required: true },
+    car_model: String,
+    title: { type: String, required: true },
+    color: String,
+    year: Number,
+    mileague: { type: String, required: true },
+})

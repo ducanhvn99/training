@@ -1,4 +1,6 @@
-export class CreateListingDto {
+import { Document } from "mongoose";
+
+export interface IListing extends Document{
     readonly username: string;
     readonly location: string;
     readonly phone: string;
@@ -11,4 +13,4 @@ export class CreateListingDto {
     readonly color: string;
     readonly year: number;
     readonly mileague: number;
-  }
+}
