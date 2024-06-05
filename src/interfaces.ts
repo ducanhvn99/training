@@ -1,6 +1,8 @@
-// 1. Create an interface representing a document in MongoDB.
-interface IUser {
-    name: string;
-    email: string;
-    avatar?: string;
-  }
+// // 1. Create an interface representing a document in MongoDB.
+// export interface IAccount {
+//     username: string;
+//     name: string;
+//     password: string;
+//     age: number;
+//     location: string;
+// }

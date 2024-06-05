@@ -1,24 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
+// import { IAccount } from "../interface/account.interface";
 
-export type AccountDocument = HydratedDocument<Account>;
-
-@Schema()
-export class Account {
-  @Prop()
-  username: string;
-
-  @Prop()
-  name: string;
-
-  @Prop()
-  password: string;
-
-  @Prop()
-  age: number;
-
-  @Prop()
-  location: string;
-}
-
-export const AccountSchema = SchemaFactory.createForClass(Account);
+export const accountSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  name: { type: String, required: true },
+  password: { type: String, required: true },
+  age: Number,
+  location: String,
+  phone: String,
+  email: String
+});

@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { AccountService } from './account.service';
-import { CreateAccountDto } from './dto/create-account.dto';
-import { Account } from './schema/account.schema';
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { AccountService } from "./account.service";
+import { CreateAccountDto } from "./dto/create-account.dto";
+import { IAccount } from "./interface/account.interface";
 
 @Controller('account')
 export class AccountController {
@@ -13,12 +13,12 @@ export class AccountController {
   }
 
   @Get()
-  async findAll(): Promise<Account[]> {
+  async findAll(): Promise<IAccount[]> {
     return this.accountService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Account> {
+  async findOne(@Param('id') id: string): Promise<IAccount> {
     return this.accountService.findOne(id);
   }
 

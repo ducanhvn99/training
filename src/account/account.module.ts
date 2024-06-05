@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { AccountController } from './account.controller';
-import { AccountService } from './account.service';
-import { Account, AccountSchema } from './schema/account.schema';
+import { Module } from "@nestjs/common";
+import { DatabaseModule } from "src/database/database.module";
+import { AccountController } from "./account.controller";
+import { AccountService } from "./account.service";
+import { accountProvider } from "./account.provider";
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Account.name, schema: AccountSchema }])],
+  imports: [DatabaseModule],
   controllers: [AccountController],
-  providers: [AccountService],
+  providers: [AccountService, ...accountProvider],
 })
 export class AccountModule {}

@@ -1,23 +1,23 @@
-import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Account } from './schema/account.schema';
-import { CreateAccountDto } from './dto/create-account.dto';
+import { Inject, Injectable } from "@nestjs/common";
+// import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { IAccount } from "./interface/account.interface";
+import { CreateAccountDto } from "./dto/create-account.dto";
 
 @Injectable()
 export class AccountService {
-  constructor(@InjectModel(Account.name) private accountModel: Model<Account>) {}
+  constructor(@Inject('ACCOUNT_MODEL') private accountModel: Model<IAccount>) {}
 
-  async create(createAccountDto: CreateAccountDto): Promise<Account> {
+  async create(createAccountDto: CreateAccountDto): Promise<IAccount> {
     const createdAccount = new this.accountModel(createAccountDto);
     return createdAccount.save();
   }
 
-  async findAll(): Promise<Account[]> {
+  async findAll(): Promise<IAccount[]> {
     return this.accountModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Account> {
+  async findOne(id: string): Promise<IAccount> {
     return this.accountModel.findOne({ _id: id }).exec();
   }
 
