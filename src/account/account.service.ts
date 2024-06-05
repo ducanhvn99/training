@@ -20,6 +20,11 @@ export class AccountService {
     return this.accountModel.findOne({ _id: id }).exec();
   }
 
+  async updateOne(id: string, createAccountDto: CreateAccountDto)
+  {
+    return this.accountModel.updateOne({_id: id}, createAccountDto).exec();
+  }
+
   async delete(id: string) {
     const deletedAccount = await this.accountModel
       .findByIdAndDelete({ _id: id })

@@ -20,6 +20,11 @@ export class ListingService {
     return this.listingModel.findOne({ _id: id }).exec();
   }
 
+  async updateOne(id: string, createListingDto: CreateListingDto)
+  {
+    return this.listingModel.updateOne({_id: id}, createListingDto).exec();
+  }
+
   async delete(id: string) {
     const deletedListing = await this.listingModel
       .findByIdAndDelete({ _id: id })

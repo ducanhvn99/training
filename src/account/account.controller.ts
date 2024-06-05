@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { AccountService } from "./account.service";
 import { CreateAccountDto } from "./dto/create-account.dto";
 import { IAccount } from "./interface/account.interface";
@@ -20,6 +20,12 @@ export class AccountController {
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<IAccount> {
     return this.accountService.findOne(id);
+  }
+
+  @Put(':id')
+  async updateOne(@Param('id') id: string, @Body() CreateAccountDto: CreateAccountDto)
+  {
+    return this.accountService.updateOne(id, CreateAccountDto);
   }
 
   @Delete(':id')
