@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-// import { IAccount } from "../interface/account.interface";
 
 export const accountSchema = new mongoose.Schema({
   username: { type: String, required: true },
