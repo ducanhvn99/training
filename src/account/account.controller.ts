@@ -22,6 +22,11 @@ export class AccountController {
     return this.accountService.findOne(id);
   }
 
+  @Get('username/:username')
+  async findOneByUsername(@Param('username') username: string): Promise<IAccount> {
+    return this.accountService.findOneByUsername(username);
+  }
+
   @Put(':id')
   async updateOne(@Param('id') id: string, @Body() CreateAccountDto: CreateAccountDto)
   {
