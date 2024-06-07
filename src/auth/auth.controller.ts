@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, UseGuards, Request } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { AuthGuard } from "./auth.guard";
-import { Public } from "src/decorators/pulic.decorator";
+import { Public } from "src/auth/decorators/pulic.decorator";
 
 @Controller('auth')
 export class AuthController {
