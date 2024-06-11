@@ -1,7 +1,8 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { Model } from "mongoose";
 import { IListing } from "./interface/listing.interface";
 import { CreateListingDto } from "./dto/create-listing.dto";
+import { currentAccount } from "src/auth/local.strategy";
 
 @Injectable()
 export class ListingService {
@@ -22,10 +23,20 @@ export class ListingService {
 
   async updateOne(id: string, createListingDto: CreateListingDto)
   {
+    const itemForUpdate = this.listingModel.findOne({_id: id});
+    if((await itemForUpdate).username != currentAccount)
+      {
+        throw new UnauthorizedException();
+      }
     return this.listingModel.updateOne({_id: id}, createListingDto).exec();
   }
 
   async delete(id: string) {
+    const itemForDelete = this.listingModel.findOne({_id: id});
+    if((await itemForDelete).username != currentAccount)
+      {
+        throw new UnauthorizedException();
+      }
     const deletedListing = await this.listingModel
       .findByIdAndDelete({ _id: id })
       .exec();
