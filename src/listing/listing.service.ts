@@ -3,6 +3,7 @@ import { Model } from "mongoose";
 import { IListing } from "./interface/listing.interface";
 import { CreateListingDto } from "./dto/create-listing.dto";
 import { currentAccount } from "src/auth/local.strategy";
+import { APIFeatures } from "src/utils/apiFeatures";
 
 @Injectable()
 export class ListingService {
@@ -15,6 +16,19 @@ export class ListingService {
 
   async findAll(): Promise<IListing[]> {
     return this.listingModel.find().exec();
+  }
+
+  async find(query?: any)
+  {
+    const features = new APIFeatures(this.listingModel.find(), query)
+      .filter()
+      .sort()
+      .limit()
+      .pagination()
+    //Execute the query
+    const listings = await features.mongooseQuery;
+
+    return listings;
   }
 
   async findOne(id: string): Promise<IListing> {
