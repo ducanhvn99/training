@@ -20,6 +20,10 @@ export class AccountService {
     return this.accountModel.findOne({ _id: id }).exec();
   }
 
+  async findOneByUsername(username: string): Promise<IAccount | undefined> {
+    return this.accountModel.findOne({ username: username }).exec();
+  }
+
   async updateOne(id: string, createAccountDto: CreateAccountDto)
   {
     return this.accountModel.updateOne({_id: id}, createAccountDto).exec();

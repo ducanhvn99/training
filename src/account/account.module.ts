@@ -8,5 +8,6 @@ import { accountProvider } from "./account.provider";
   imports: [DatabaseModule],
   controllers: [AccountController],
   providers: [AccountService, ...accountProvider],
+  exports: [AccountService],
 })
 export class AccountModule {}

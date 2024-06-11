@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res } from "@nestjs/common";
 import { ListingService } from "./listing.service";
 import { CreateListingDto } from "./dto/create-listing.dto";
 import { IListing } from "./interface/listing.interface";
+import { Public } from "src/auth/decorators/pulic.decorator";
 
 @Controller('listing')
 export class ListingController {
@@ -12,9 +13,21 @@ export class ListingController {
     await this.listingService.create(createListingDto);
   }
 
+  @Public()
   @Get()
   async findAll(): Promise<IListing[]> {
     return this.listingService.findAll();
+  }
+
+  @Public()
+  @Get('criteria')
+  async find(@Res() response: any, @Req() request: any) {
+    const listings = await this.listingService.find(request.query);
+
+    return response.status(200).json({
+      message: 'success',
+      data: listings,
+    });
   }
 
   @Get(':id')
