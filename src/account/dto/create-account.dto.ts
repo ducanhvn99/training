@@ -1,4 +1,4 @@
-export class CreateAccountDto {
+export default class CreateAccountDto {
   readonly username: string;
   readonly name: string;
   readonly password: string;

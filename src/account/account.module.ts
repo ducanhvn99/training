@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
-import { DatabaseModule } from "src/database/database.module";
-import { AccountController } from "./account.controller";
-import { AccountService } from "./account.service";
+import DatabaseModule from "src/database/database.module";
+import AccountController from "./account.controller";
+import AccountService from "./account.service";
 import { accountProvider } from "./account.provider";
 
 @Module({
@@ -10,4 +10,4 @@ import { accountProvider } from "./account.provider";
   providers: [AccountService, ...accountProvider],
   exports: [AccountService],
 })
-export class AccountModule {}
+export default class AccountModule {}
