@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 
-export interface IListing extends Document{
+export default interface IListing extends Document{
     readonly username: string;
     readonly location: string;
     readonly phone: string;

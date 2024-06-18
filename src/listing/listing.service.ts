@@ -1,12 +1,12 @@
 import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { Model } from "mongoose";
-import { IListing } from "./interface/listing.interface";
-import { CreateListingDto } from "./dto/create-listing.dto";
+import IListing from "./interface/listing.interface";
+import CreateListingDto from "./dto/create-listing.dto";
 import { currentAccount } from "src/auth/local.strategy";
 import { APIFeatures } from "src/utils/apiFeatures";
 
 @Injectable()
-export class ListingService {
+export default class ListingService {
   constructor(@Inject('LISTING_MODEL') private listingModel: Model<IListing>) {}
 
   async create(createListingDto: CreateListingDto): Promise<IListing> {

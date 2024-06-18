@@ -1,6 +1,6 @@
 import { Document } from "mongoose";
 
-export interface IAccount extends Document{
+export default interface IAccount extends Document{
     readonly username: string;
     readonly name: string;
     readonly password: string;

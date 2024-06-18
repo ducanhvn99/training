@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res } from "@nestjs/common";
-import { ListingService } from "./listing.service";
-import { CreateListingDto } from "./dto/create-listing.dto";
-import { IListing } from "./interface/listing.interface";
+import ListingService from "./listing.service";
+import CreateListingDto from "./dto/create-listing.dto";
+import IListing from "./interface/listing.interface";
 import { Public } from "src/auth/decorators/pulic.decorator";
 
 @Controller('listing')
-export class ListingController {
+export default class ListingController {
   constructor(private readonly listingService: ListingService) {}
 
   @Post()

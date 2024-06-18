@@ -1,4 +1,4 @@
-export class CreateListingDto {
+export default class CreateListingDto {
     readonly username: string;
     readonly location: string;
     readonly phone: string;

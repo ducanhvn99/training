@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { AccountService } from "./account.service";
-import { CreateAccountDto } from "./dto/create-account.dto";
-import { IAccount } from "./interface/account.interface";
+import AccountService from "./account.service";
+import CreateAccountDto from "./dto/create-account.dto";
+import IAccount from "./interface/account.interface";
 
 @Controller('account')
-export class AccountController {
+export default class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
   @Post()
